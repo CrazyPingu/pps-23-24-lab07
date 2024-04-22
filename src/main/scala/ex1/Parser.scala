@@ -44,7 +44,7 @@ object Parsers:
     abstract override def parse(t: T): Boolean =
       count += 1
       count <= n && super.parse(t)
-    abstract override def end: Boolean = count < n && super.end
+    abstract override def end: Boolean = count <= n && super.end
 
   class NotTwoConsecutiveParser(chars: Set[Char]) extends BasicParser(chars)  with NotTwoConsecutive[Char]
 
