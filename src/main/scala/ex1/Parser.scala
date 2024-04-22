@@ -37,6 +37,15 @@ object Parsers:
       res && super.parse(t)
 //    abstract override def end: Boolean = last.isDefined && super.end
 
+
+  trait ShortenThenN[T] extends Parser[T]:
+    private val n =3
+    private var count = 0
+    abstract override def parse(t: T): Boolean =
+      count += 1
+      count <= n && super.parse(t)
+    abstract override def end: Boolean = count < n && super.end
+
   class NotTwoConsecutiveParser(chars: Set[Char]) extends BasicParser(chars)  with NotTwoConsecutive[Char]
 
 @main def checkParsers(): Unit =
